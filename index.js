@@ -32,6 +32,17 @@ function fadeIn(element, duration) {
 }
 
 /**
+ * Блок плавно становиться прозрачным.
+ * @param element — HTMLElement, который надо анимировать
+ * @param duration — Продолжительность анимации в миллисекундах
+ */
+function fadeOut(element, duration) {
+    element.style.transitionDuration =  `${duration}ms`;
+    element.classList.remove('show');
+    element.classList.add('hide');
+}
+
+/**
  * Функция, передвигающая элемент
  * @param element — HTMLElement, который надо анимировать
  * @param duration — Продолжительность анимации в миллисекундах
@@ -62,4 +73,12 @@ function getTransform(translation, ratio) {
         result.push(`scale(${ratio})`);
     }
     return result.join(' ');
+}
+
+function animaster(){
+    return{
+        move,
+        scale,
+        fadeIn
+    }
 }
