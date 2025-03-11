@@ -18,6 +18,12 @@ function addListeners() {
             const block = document.getElementById('scaleBlock');
             scale(block, 1000, 1.25);
         });
+
+    document.getElementById('moveAndHidePlay')
+        .addEventListener('click', function () {
+            const block = document.getElementById('moveAndHideBlock');
+            moveAndHide(block, 1000, {x: 100, y: 20});
+        });
 }
 
 /**
@@ -73,6 +79,11 @@ function getTransform(translation, ratio) {
         result.push(`scale(${ratio})`);
     }
     return result.join(' ');
+}
+
+function moveAndHide(element, duration, translation){
+    move(element, duration * 0.4, translation)
+    fadeOut(element, duration * 0.6)
 }
 
 function animaster(){
