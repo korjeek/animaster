@@ -97,11 +97,24 @@ function showAndHide(element, duration){
     setTimeout(() => fadeOut(element, duration / 3), duration / 3);
 }
 
+function restFadeIn(element){
+    element.style.transitionDuration = null;
+}
+
+function restFadeOut(element){
+    element.style.transitionDuration = null;
+}
+
+function resetMoveAndScale(element){
+    element.style.transitionDuration = null;
+}
+
 function animaster(){
     return{
         move,
         scale,
         fadeIn,
-        showAndHide
+        showAndHide,
+        moveAndHide
     }
 }
