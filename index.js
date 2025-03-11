@@ -1,5 +1,7 @@
 addListeners();
 
+let heartBeatingAnimation;
+
 function addListeners() {
     document.getElementById('fadeInPlay')
         .addEventListener('click', function () {
@@ -34,7 +36,15 @@ function addListeners() {
     document.getElementById('heartBeatingPlay')
         .addEventListener('click', function () {
             const block = document.getElementById('heartBeatingBlock');
-            heartBeating(block, 500, 1.4);
+            heartBeatingAnimation = heartBeating(block, 500, 1.4);
+        });
+
+    document.getElementById('heartBeatingStop')
+        .addEventListener('click', function () {
+            if (heartBeatingAnimation){
+                heartBeatingAnimation.stop()
+                heartBeatingAnimation = null;
+            }
         });
 }
 
@@ -103,8 +113,9 @@ function showAndHide(element, duration){
     setTimeout(() => fadeOut(element, duration / 3), duration / 3);
 }
 
-function heartBeating(element, duration, ratio){
+function heartBeating(element, duration, ratio) {
     let scaleUp = true;
+    let intervalId;
 
     function animateScale() {
         if (scaleUp) {
@@ -114,7 +125,14 @@ function heartBeating(element, duration, ratio){
         }
         scaleUp = !scaleUp;
     }
-    setInterval(animateScale, duration);
+
+    intervalId = setInterval(animateScale, duration);
+
+    return {
+        stop() {
+            clearInterval(intervalId);
+        }
+    };
 }
 
 function restFadeIn(element){
