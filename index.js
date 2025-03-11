@@ -30,6 +30,12 @@ function addListeners() {
             const block = document.getElementById('moveAndHideBlock');
             moveAndHide(block, 1000, {x: 100, y: 20});
         });
+
+    document.getElementById('heartBeatingPlay')
+        .addEventListener('click', function () {
+            const block = document.getElementById('heartBeatingBlock');
+            heartBeating(block, 500, 1.4);
+        });
 }
 
 /**
@@ -88,13 +94,27 @@ function getTransform(translation, ratio) {
 }
 
 function moveAndHide(element, duration, translation){
-    move(element, duration * 0.4, translation)
-    fadeOut(element, duration * 0.6)
+    move(element, duration * 0.4, translation);
+    fadeOut(element, duration * 0.6);
 }
 
 function showAndHide(element, duration){
     fadeIn(element, duration / 3);
     setTimeout(() => fadeOut(element, duration / 3), duration / 3);
+}
+
+function heartBeating(element, duration, ratio){
+    let scaleUp = true;
+
+    function animateScale() {
+        if (scaleUp) {
+            scale(element, duration, ratio);
+        } else {
+            scale(element, duration, 1);
+        }
+        scaleUp = !scaleUp;
+    }
+    setInterval(animateScale, duration);
 }
 
 function restFadeIn(element){
@@ -115,6 +135,7 @@ function animaster(){
         scale,
         fadeIn,
         showAndHide,
-        moveAndHide
+        moveAndHide,
+        heartBeating
     }
 }
